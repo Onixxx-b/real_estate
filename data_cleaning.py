@@ -1,6 +1,6 @@
 import pandas as pd
 
-flats_data = pd.read_excel("flats_02_2024.xls")
+flats_data = pd.read_excel("data/flats.xls")
 
 clean_flats_data = flats_data
 clean_flats_data['Price'] = clean_flats_data['Price'].str.replace(" ", "").str.extract(r'(\d+)').apply(pd.to_numeric)

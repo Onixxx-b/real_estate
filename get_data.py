@@ -24,5 +24,5 @@ for page in range(0, 596):
 
 json_data = json.dumps(flats, ensure_ascii=False)
 
-with open('flats_02_2024.json', 'w', encoding='utf-8') as f:
+with open('data/flats_02_2024.json', 'w', encoding='utf-8') as f:
     json.dump(json_data, f, ensure_ascii=False, indent=4)

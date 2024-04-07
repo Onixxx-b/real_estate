@@ -1,7 +1,7 @@
 import json
 import xlwt
 
-with open('flats_02_2024.json', 'r', encoding='utf-8') as f:
+with open('data/flats_02_2024.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
 workbook = xlwt.Workbook()
@@ -20,4 +20,4 @@ for i, flat in zip(range(len(data['flats'])), data['flats']):
     sheet.write(i+1, 4, flat['floor'])
     sheet.write(i+1, 5, flat['subway'])
 
-workbook.save('flats_02_2024.xls')
+workbook.save('data/flats_02_2024.xls')
