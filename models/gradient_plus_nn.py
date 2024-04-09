@@ -8,7 +8,7 @@ import xgboost as xgb
 import pickle
 
 
-df = pd.read_excel('../data/clean_flats.xlsx')
+df = pd.read_excel('../data/clean_flats_minus_percent.xlsx')
 features = ['Region', 'Room count', 'Total Square', 'Floor', 'Subway', 'Max Floor', 'Living Square', 'Kitchen Square']
 
 X_train, X_test, y_train, y_test = train_test_split(df[features], df['Price'], test_size=0.2, random_state=0)
@@ -36,7 +36,7 @@ for i in range(num_networks):
 for i, model in enumerate(networks):
     model.fit(X_train, y_train, epochs=10, batch_size=64)
     print(f"Network {i+1} trained.")
-    model.save(f"saved/model_{i}.h5")
+    model.save(f"../saved_percent/model_{i}.h5")
 
 y_pred_networks = np.zeros((num_networks, len(X_test)))
 for i, model in enumerate(networks):
@@ -44,7 +44,7 @@ for i, model in enumerate(networks):
 
 boosting_model = xgb.XGBRegressor()
 boosting_model.fit(y_pred_networks.T, y_test)
-with open("../saved/xgb_model.pkl", "wb") as f:
+with open("../saved_percent/xgb_model.pkl", "wb") as f:
     pickle.dump(boosting_model, f)
 
 y_pred_boosting = boosting_model.predict(y_pred_networks.T)

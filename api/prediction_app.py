@@ -9,7 +9,7 @@ def get_prediction(region, room_count, total_sq, floor, subway, max_fl, liv_sq, 
     num_networks = 5
     networks = []
     for i in range(num_networks):
-        model = load_model(f"../saved/model_{i}.h5")
+        model = load_model(f"../saved_percent/model_{i}.h5")
         networks.append(model)
 
     features = np.array([region, room_count, total_sq, floor, subway, max_fl, liv_sq, kitchen_sq])
@@ -18,7 +18,7 @@ def get_prediction(region, room_count, total_sq, floor, subway, max_fl, liv_sq, 
     y_pred_networks = np.zeros((num_networks, len(X_new)))
     for i, model in enumerate(networks):
         y_pred_networks[i] = model.predict(X_new).flatten()
-    with open("../saved/xgb_model.pkl", "rb") as f:
+    with open("../saved_percent/xgb_model.pkl", "rb") as f:
         boosting_model = pickle.load(f)
     prediction = boosting_model.predict(y_pred_networks.T)
     return prediction[0]

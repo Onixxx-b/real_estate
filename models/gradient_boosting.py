@@ -5,7 +5,7 @@ from xgboost import XGBRegressor
 from sklearn.metrics import r2_score, mean_absolute_error, mean_absolute_percentage_error, mean_squared_error
 import matplotlib.pyplot as plt
 
-df = pd.read_excel('../data/clean_flats.xlsx')
+df = pd.read_excel('../data/clean_flats_minus_percent.xlsx')
 features = ['Region', 'Room count', 'Total Square', 'Floor', 'Subway', 'Max Floor', 'Living Square', 'Kitchen Square']
 X_train, X_test, y_train, y_test = train_test_split(df[features], df['Price'], test_size=0.2, random_state=42)
 

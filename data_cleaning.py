@@ -4,6 +4,7 @@ flats_data = pd.read_excel("data/flats.xls")
 
 clean_flats_data = flats_data
 clean_flats_data['Price'] = clean_flats_data['Price'].str.replace(" ", "").str.extract(r'(\d+)').apply(pd.to_numeric)
+clean_flats_data['Price'] = clean_flats_data['Price'] - clean_flats_data['Price'] * 0.1
 clean_flats_data['Room count'] = clean_flats_data['Room count'].str.extract(r'(\d+)').apply(pd.to_numeric)
 
 clean_flats_data['Max Floor'] = clean_flats_data['Floor'].str.split(' ').str[3].apply(pd.to_numeric)
@@ -30,4 +31,4 @@ clean_flats_data['Subway'] = clean_flats_data['Subway'].apply(lambda x: 1 if pd.
 clean_flats_data = clean_flats_data.dropna()
 clean_flats_data = clean_flats_data.drop(clean_flats_data[clean_flats_data['Total Square'] > 300].index)
 
-clean_flats_data.to_excel("data/clean_flats.xlsx")
+clean_flats_data.to_excel("data/clean_flats_minus_percent.xlsx")
