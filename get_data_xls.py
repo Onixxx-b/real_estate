@@ -1,13 +1,13 @@
 import json
 import xlwt
 
-with open('data/flats_02_2024.json', 'r', encoding='utf-8') as f:
+with open('data/flats_04_2024.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
 workbook = xlwt.Workbook()
-sheet = workbook.add_sheet('Flats')
+sheet = workbook.add_sheet('flats')
 
-columns = ['Price', 'Region', 'Room count', 'Square', 'Floor', 'Subway']
+columns = ['price', 'region', 'room_count', 'square', 'floor', 'subway']
 
 for i, column in enumerate(columns):
     sheet.write(0, i, column)
@@ -20,4 +20,4 @@ for i, flat in zip(range(len(data['flats'])), data['flats']):
     sheet.write(i+1, 4, flat['floor'])
     sheet.write(i+1, 5, flat['subway'])
 
-workbook.save('data/flats_02_2024.xls')
+workbook.save('data/flats_04_2024.xls')

@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS, cross_origin
 from keras.models import load_model
 import numpy as np
 import pickle
@@ -24,9 +25,12 @@ def get_prediction(region, room_count, total_sq, floor, subway, max_fl, liv_sq, 
 
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 @app.route('/api/regions')
+@cross_origin()
 def get_regions():
     regions = {
         'regions': [
@@ -75,10 +79,10 @@ def get_regions():
     return jsonify(regions)
 
 
-@app.route('/api/price')
+@app.route('/api/price', methods=['POST'])
+@cross_origin()
 def get_price():
     data = request.json
-
     prediction = get_prediction(int(data['Region']), int(data['Room count']), float(data['Total Square']),
                                 int(data['Floor']), int(data['Subway']), int(data['Max Floor']),
                                 float(data['Living Square']), float(data['Kitchen Square']))
@@ -88,4 +92,3 @@ def get_price():
 
 if __name__ == '__main__':
     app.run(debug=True)
-

@@ -30,4 +30,4 @@ clean_flats_data['Subway'] = clean_flats_data['Subway'].apply(lambda x: 1 if pd.
 clean_flats_data = clean_flats_data.dropna()
 clean_flats_data = clean_flats_data.drop(clean_flats_data[clean_flats_data['Total Square'] > 300].index)
 
-clean_flats_data.to_excel("clean_flats_02_2024.xlsx")
+clean_flats_data.to_excel("data/clean_flats.xlsx")
