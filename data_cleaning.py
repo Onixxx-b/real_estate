@@ -3,6 +3,13 @@ import pandas as pd
 flats_data = pd.read_excel("data/flats.xls")
 
 clean_flats_data = flats_data
+# print(clean_flats_data['Price'].isnull().sum())
+# print(clean_flats_data['Room count'].isnull().sum())
+# print(clean_flats_data['Floor'].isnull().sum())
+# print(clean_flats_data['Region'].isnull().sum())
+# print(clean_flats_data['Square'].isnull().sum())
+# print(clean_flats_data['Subway'].isnull().sum())
+
 clean_flats_data['Price'] = clean_flats_data['Price'].str.replace(" ", "").str.extract(r'(\d+)').apply(pd.to_numeric)
 clean_flats_data['Price'] = clean_flats_data['Price'] - clean_flats_data['Price'] * 0.1
 clean_flats_data['Room count'] = clean_flats_data['Room count'].str.extract(r'(\d+)').apply(pd.to_numeric)

@@ -12,7 +12,9 @@ def get_prediction(region, room_count, total_sq, floor, subway, max_fl, liv_sq, 
         model = load_model(f"../saved_percent/model_{i}.h5")
         networks.append(model)
 
-    features = np.array([region, room_count, total_sq, floor, subway, max_fl, liv_sq, kitchen_sq])
+    regions = np.zeros(10)
+    regions[region] = 1
+    features = np.array([room_count, total_sq, floor, subway, max_fl, liv_sq, kitchen_sq, regions])
     X_new = np.column_stack(features)
 
     y_pred_networks = np.zeros((num_networks, len(X_new)))
@@ -36,43 +38,43 @@ def get_regions():
         'regions': [
             {
                 'name': 'Голосіївський',
-                'index': 1
+                'index': 0
             },
             {
                 'name': 'Солом\'янський',
-                'index': 2
-            },
-            {
-                'name': 'Шевченківський',
-                'index': 3
-            },
-            {
-                'name': 'Святошинський',
-                'index': 4
-            },
-            {
-                'name': 'Подільський',
-                'index': 5
-            },
-            {
-                'name': 'Дарницький',
-                'index': 6
-            },
-            {
-                'name': 'Печерський',
-                'index': 7
-            },
-            {
-                'name': 'Оболонський',
                 'index': 8
             },
             {
-                'name': 'Деснянський',
+                'name': 'Шевченківський',
                 'index': 9
             },
             {
+                'name': 'Святошинський',
+                'index': 7
+            },
+            {
+                'name': 'Подільський',
+                'index': 6
+            },
+            {
+                'name': 'Дарницький',
+                'index': 1
+            },
+            {
+                'name': 'Печерський',
+                'index': 5
+            },
+            {
+                'name': 'Оболонський',
+                'index': 4
+            },
+            {
+                'name': 'Деснянський',
+                'index': 2
+            },
+            {
                 'name': 'Дніпровський',
-                'index': 10
+                'index': 3
             }
         ]
     }
